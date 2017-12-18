@@ -1,0 +1,51 @@
+<!doctype html>
+<!--
+Conway's Game of Life kata exercise
+Author: Tyler Rasor
+Date: 2017-12-18
+-->
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Conways's Game of Life</title>
+    <!-- jQuery from Google CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Game of Life jQuery plugin -->
+    <script src="gameOfLife.js"></script>
+  </head>
+  <body>
+    <div>
+      <label>Dimensions of game board (default is 8x6):</label>
+    </div>
+    <div>
+      <label>Number of columns:</label>
+      <input type="text" id="numCols" size="4"/>
+      <label>Number of rows:</label>
+      <input type="text" id="numRows" size="4"/>
+      <label>Random initial state:</label>
+      <input type="checkbox" id="randomInitialState"/>
+      <label>Run unit tests:</label>
+      <input type="checkbox" id="runUnitTests"/>
+      <button id="createGame">GO</button>
+    </div>
+    <div id="test" style="width:800px;height:600px;"></div>
+    <script>
+        $(function() {
+            $('#createGame').on('click', function() {
+                var options = {
+                    'randomInitialState':$('#randomInitialState').prop('checked'),
+                    '_runUnitTests':$('#runUnitTests').prop('checked')
+                };
+                var numRows = $('#numRows').val();
+                var numCols = $('#numCols').val();
+                if ($.isNumeric(numRows) && $.isNumeric(numCols)) {
+                    options['numRows'] = numRows;
+                    options['numCols'] = numCols;
+                }
+                $('#test').gameOfLife(options);
+            });
+        });
+    </script>
+  </body>
+</html>
